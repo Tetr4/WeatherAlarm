@@ -35,6 +35,10 @@ public class WeatherRule {
         this.time_offset = time_offset;
     }
 
+    public int getKey() {
+        return id;
+    }
+
     public int getWeatherId() {
         return weather_id;
     }

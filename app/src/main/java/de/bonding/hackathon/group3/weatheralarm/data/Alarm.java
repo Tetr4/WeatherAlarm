@@ -13,6 +13,9 @@ public class Alarm {
     @DatabaseField(canBeNull = false)
     private String location;
 
+    @DatabaseField
+    private String name = null;
+
     @DatabaseField(canBeNull = false)
     private Date desired_time;
     @DatabaseField
@@ -40,5 +43,25 @@ public class Alarm {
 
     public int getId() {
         return id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Date getDesiredTime() {
+        return desired_time;
+    }
+
+    public Date getActualTime() {
+        return actual_time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
