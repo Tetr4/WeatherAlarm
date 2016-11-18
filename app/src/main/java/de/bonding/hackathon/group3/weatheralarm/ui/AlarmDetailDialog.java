@@ -26,6 +26,11 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
         return alarmDao.queryForAll();
     }
 
+    public static AlarmDetailDialog newInstance() {
+        AlarmDetailDialog fragment = new AlarmDetailDialog();
+        return new AlarmDetailDialog();
+    }
+
     public static AlarmDetailDialog newInstance(Alarm alarm) {
         AlarmDetailDialog fragment = new AlarmDetailDialog();
 
@@ -35,6 +40,7 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
 
         return fragment;
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
