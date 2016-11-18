@@ -13,6 +13,9 @@ public class Alarm {
     @DatabaseField(canBeNull = false)
     private String location;
 
+    @DatabaseField(canBeNull = false)
+    private boolean enabled;
+
     @DatabaseField
     private String name = null;
 
@@ -28,6 +31,7 @@ public class Alarm {
     public Alarm(Date desired_time, String location) {
         this.desired_time = desired_time;
         this.location = location;
+        this.enabled = true;
     }
 
     /**
@@ -63,5 +67,13 @@ public class Alarm {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
