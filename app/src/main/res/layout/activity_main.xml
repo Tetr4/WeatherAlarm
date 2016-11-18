@@ -38,15 +38,4 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!-- controls -->
-    <fragment
-        android:id="@+id/fragment_playback_controls"
-        android:name="de.bonding.hackathon.group3.weatheralarm.ui.AlarmFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        tools:layout="@layout/fragment_alarm" />
-
 </android.support.design.widget.CoordinatorLayout>

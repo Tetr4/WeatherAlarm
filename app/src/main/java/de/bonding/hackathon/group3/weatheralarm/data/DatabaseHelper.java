@@ -10,6 +10,9 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -41,6 +44,34 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Alarm.class);
             TableUtils.createTable(connectionSource, WeatherInfo.class);
             TableUtils.createTable(connectionSource, WeatherRule.class);
+
+            // Create some dummy data.
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            try {
+                Date date = formatter.parse("12:00");
+                Alarm alarm = new Alarm(date, "Brunswick");
+                alarm.setName("Aufstehen");
+                date = formatter.parse("11:30");
+                alarm.setActualTime(date);
+                getAlarmDao().create(alarm);
+
+                date = formatter.parse("20:00");
+                alarm = new Alarm(date, "Brunswick");
+                alarm.setName("Flyer verteilen");
+                date = formatter.parse("20:15");
+                alarm.setActualTime(date);
+                getAlarmDao().create(alarm);
+
+                WeatherRule rule = new WeatherRule(211, "Thunderstorm", -30);
+                rule.setDescription("Gewitter - Langsam fahren");
+                getWeatherRuleDao().create(rule);
+                rule = new WeatherRule(501, "Rain", 15);
+                rule.setDescription("Bei Regen das Auto nehmen");
+                getWeatherRuleDao().create(rule);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
         catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
