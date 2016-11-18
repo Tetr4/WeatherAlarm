@@ -1,3 +1,6 @@
+// Nach einer Idee von Annette Thurow
+
+
 package de.bonding.hackathon.group3.weatheralarm.ui;
 
 import android.os.Bundle;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //s.getWeatherInfo("3","3","1ba0f7625b66f86d1ca94f34f280b147");
 
         OpenWeatherMapService meinLadeVideoTask = new OpenWeatherMapService();
-        meinLadeVideoTask.execute("3","3","1ba0f7625b66f86d1ca94f34f280b147", this);
+        meinLadeVideoTask.execute("London,uk","3","1ba0f7625b66f86d1ca94f34f280b147", this);
 
     }
 
