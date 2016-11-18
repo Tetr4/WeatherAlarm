@@ -46,19 +46,27 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, WeatherRule.class);
 
             // Create some dummy data.
-            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
             try {
                 Date date = formatter.parse("12:00");
                 Alarm alarm = new Alarm(date, "Brunswick");
+                alarm.setName("Aufstehen");
+                date = formatter.parse("11:30");
+                alarm.setActualTime(date);
                 getAlarmDao().create(alarm);
 
                 date = formatter.parse("20:00");
                 alarm = new Alarm(date, "Brunswick");
+                alarm.setName("Flyer verteilen");
+                date = formatter.parse("20:15");
+                alarm.setActualTime(date);
                 getAlarmDao().create(alarm);
 
                 WeatherRule rule = new WeatherRule(211, "Thunderstorm", -30);
+                rule.setDescription("Gewitter - Langsam fahren");
                 getWeatherRuleDao().create(rule);
                 rule = new WeatherRule(501, "Rain", 15);
+                rule.setDescription("Bei Regen das Auto nehmen");
                 getWeatherRuleDao().create(rule);
             } catch (ParseException e) {
                 e.printStackTrace();
