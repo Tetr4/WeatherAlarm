@@ -9,11 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
 import de.bonding.hackathon.group3.weatheralarm.R;
+import de.bonding.hackathon.group3.weatheralarm.data.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private CoordinatorLayout mCoordinatorLayout;
+
+    // Used to access the sqlite database.
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,23 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
+    // Get the database singleton
+    public DatabaseHelper getDatabase() {
+        if (databaseHelper == null) {
+            databaseHelper =
+                    OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
