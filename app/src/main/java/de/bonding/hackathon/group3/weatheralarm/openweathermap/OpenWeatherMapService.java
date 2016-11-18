@@ -31,6 +31,7 @@ public class OpenWeatherMapService extends AsyncTask<Object, String, String> {
     private MainActivity main = null;
     private String lat;
     private String lon;
+    private String loc;
 
     protected void onProgressUpdate(Integer... progress) {
 
@@ -70,13 +71,15 @@ public class OpenWeatherMapService extends AsyncTask<Object, String, String> {
         return result.toString();
     }
 
-    public void getWeatherInfo(String llon, String llat, String appid) {
+    public void getWeatherInfo(String lloc, String llat, String appid) {
         //api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
         JsonElement jelement = null;
-        this.lat = llat;
-        this.lon = llon;
+        //this.lat = llat;
+        //this.lon = llon;
+        this.loc = lloc;
+
         try {
-            String json = getHTML("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid="+appid);
+            String json = getHTML("http://api.openweathermap.org/data/2.5/forecast?q="+lloc+"&appid="+appid);
             jelement = new JsonParser().parse(json);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,8 +105,9 @@ public class OpenWeatherMapService extends AsyncTask<Object, String, String> {
                 WeatherInfo info = new WeatherInfo();
                 JsonObject curr = weather.get(i).getAsJsonObject();
 
-                info.setLat(lat);
-                info.setLon(lon);
+                //info.setLat(lat);
+               // info.setLon(lon);
+                info.setLocation(this.loc);
 
                 Date d = new Date(Integer.parseInt(curr.get("dt").getAsString()));
                 info.setTime(d);
@@ -118,10 +122,10 @@ public class OpenWeatherMapService extends AsyncTask<Object, String, String> {
                 info.setWindDegree(Double.parseDouble(wind.get("deg").getAsString()));
 
                 JsonObject weather2 = curr.get("weather").getAsJsonArray().get(0).getAsJsonObject();
-                info.setWeather_id(Integer.parseInt(weather2.get("id").getAsString()));
+                info.setWeatherID(Integer.parseInt(weather2.get("id").getAsString()));
                 info.setWeatherName(weather2.get("main").getAsString());
                 info.setWeatherDescription(weather2.get("description").getAsString());
-                info.setWeatherID(weather2.get("icon").getAsString());
+                info.setIcon(weather2.get("icon").getAsString());
 
 
                 ruleDao.create(info);

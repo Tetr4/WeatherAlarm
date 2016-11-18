@@ -11,14 +11,22 @@ public class WeatherInfo {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(canBeNull = false)
+    //@DatabaseField(canBeNull = false)
     private String lat;
 
-    @DatabaseField(canBeNull = false)
+    //@DatabaseField(canBeNull = false)
     private String lon;
 
     @DatabaseField(canBeNull = false)
-    private Double temp;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     @DatabaseField(canBeNull = false)
     private Double tempMin;
@@ -31,7 +39,6 @@ public class WeatherInfo {
 
     @DatabaseField(canBeNull = false)
     private Double windDegree;
-    private String location;
 
     @DatabaseField(canBeNull = false)
     private Date time;
@@ -42,7 +49,7 @@ public class WeatherInfo {
     private int weather_id;
 
     @DatabaseField(canBeNull = false)
-    private String temp;
+    private double temp;
 
     @DatabaseField(canBeNull = false)
     private String icon;
@@ -51,21 +58,13 @@ public class WeatherInfo {
         // ORMLite needs a no-arg constructor.
     }
 
-    public WeatherInfo(String location, Date time, int weather_id, String temp, String icon) {
-        this.location = location;
+    public WeatherInfo(Date time, int weather_id, double temp, String icon) {
         this.time = time;
         this.weather_id = weather_id;
         this.temp = temp;
         this.icon = icon;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public Date getTime() {
         return time;
@@ -75,19 +74,19 @@ public class WeatherInfo {
         this.time = time;
     }
 
-    public int getWeatherId() {
+    public int getWeatherID() {
         return weather_id;
     }
 
-    public void setWeatherId(int weather_id) {
+    public void setWeatherID(int weather_id) {
         this.weather_id = weather_id;
     }
 
-    public String getTemp() {
+    public double getTemp() {
         return temp;
     }
 
-    public void setTemp(String temp) {
+    public void setTemp(double temp) {
         this.temp = temp;
     }
 
@@ -98,6 +97,7 @@ public class WeatherInfo {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+    @DatabaseField(canBeNull = false)
     private String weatherDescription;
 
     @DatabaseField(canBeNull = false)
@@ -127,13 +127,6 @@ public class WeatherInfo {
         this.lon = lon;
     }
 
-    public Double getTemp() {
-        return temp;
-    }
-
-    public void setTemp(Double temp) {
-        this.temp = temp;
-    }
 
     public Double getTempMin() {
         return tempMin;
@@ -167,21 +160,7 @@ public class WeatherInfo {
         this.windDegree = windDegree;
     }
 
-    public Date getTime() {
-        return time;
-    }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public int getWeather_id() {
-        return weather_id;
-    }
-
-    public void setWeather_id(int weather_id) {
-        this.weather_id = weather_id;
-    }
 
     public String getWeatherName() {
         return weatherName;
@@ -191,13 +170,6 @@ public class WeatherInfo {
         this.weatherName = weatherName;
     }
 
-    public String getWeatherID() {
-        return weatherID;
-    }
-
-    public void setWeatherID(String weatherID) {
-        this.weatherID = weatherID;
-    }
 
     public String getWeatherDescription() {
         return weatherDescription;
@@ -207,8 +179,6 @@ public class WeatherInfo {
         this.weatherDescription = weatherDescription;
     }
 
-    @DatabaseField(canBeNull = false)
-    private String weatherID;
 
 
 
