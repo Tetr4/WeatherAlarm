@@ -49,6 +49,7 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
         if (edit) {
             ListView list = (ListView) dialogView.findViewById(R.id.rules_list);
             // TODO put alarm rule entries into list
+            // TODO set timepicker
         }
 
         // build alert dialog
