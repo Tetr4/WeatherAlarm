@@ -37,4 +37,8 @@ public class Alarm {
             return actual_time;
         return desired_time;
     }
+
+    public int getId() {
+        return id;
+    }
 }
