@@ -1,5 +1,6 @@
 package de.bonding.hackathon.group3.weatheralarm.ui;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
         View rowView = inflater.inflate(R.layout.list_item_alarm, parent, false);
 
         final Alarm alarm = getItem(position);
-        MainActivity main = (MainActivity)getContext();
+        final MainActivity main = (MainActivity)getContext();
         DatabaseHelper db = main.getDatabase();
         final RuntimeExceptionDao<Alarm, Integer> alarmDao = db.getAlarmDao();
 
@@ -50,6 +51,16 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
                 alarm.setEnabled(isChecked);
                 alarmDao.update(alarm);
                 Toast.makeText(getContext(), "Alarm " + (isChecked?"aktiviert":"deaktiviert"), Toast.LENGTH_SHORT);
+            }
+        });
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = main.getFragmentManager().beginTransaction();
+                AlarmDetailDialog detail = AlarmDetailDialog.newInstance(alarm);
+                ft.add(detail, "alarm_details");
+                ft.commit();
             }
         });
 
