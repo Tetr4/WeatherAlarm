@@ -6,13 +6,19 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import de.bonding.hackathon.group3.weatheralarm.R;
+import de.bonding.hackathon.group3.weatheralarm.WeatherAlarmApplication;
 import de.bonding.hackathon.group3.weatheralarm.data.DatabaseHelper;
+import de.bonding.hackathon.group3.weatheralarm.openweathermap.OpenWeatherMapService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initTabs();
+        Log.i("ASD","test");
+        //OpenWeatherMapService s = new OpenWeatherMapService();
+        //s.getWeatherInfo("3","3","1ba0f7625b66f86d1ca94f34f280b147");
+
+        OpenWeatherMapService meinLadeVideoTask = new OpenWeatherMapService();
+        meinLadeVideoTask.execute("3","3","1ba0f7625b66f86d1ca94f34f280b147", this);
+
     }
 
     @Override
