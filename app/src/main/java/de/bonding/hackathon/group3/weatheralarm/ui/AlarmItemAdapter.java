@@ -68,7 +68,7 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
         }
 
         // Format the time.
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         txtAlarmTime.setText(format.format(alarm.getDesiredTime()));
 
         // Only show an estimate if we have weather information.

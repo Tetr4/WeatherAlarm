@@ -61,6 +61,10 @@ public class Alarm {
         return actual_time;
     }
 
+    public void setActualTime(Date actual_time) {
+        this.actual_time = actual_time;
+    }
+
     public String getName() {
         return name;
     }
