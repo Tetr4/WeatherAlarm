@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Alarm List -->
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rule_list"
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    tools:listitem="@layout/list_item_rule" />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Rules List -->
+    <ListView
+        android:id="@+id/rules_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_item_alarm" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+</FrameLayout>
