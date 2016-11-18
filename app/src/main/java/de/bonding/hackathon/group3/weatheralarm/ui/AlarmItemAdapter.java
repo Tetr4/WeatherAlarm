@@ -54,9 +54,9 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
                 // Save the new state
                 alarm.setEnabled(isChecked);
                 alarmDao.update(alarm);
-                Toast.makeText(getContext(), "Alarm " + (isChecked?"aktiviert":"deaktiviert"), Toast.LENGTH_SHORT);
             }
         });
+        togglebutton.setChecked(alarm.isEnabled());
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
