@@ -25,6 +25,9 @@ public class WeatherRule {
     @DatabaseField(canBeNull = false)
     private int time_offset;
 
+    @DatabaseField
+    private String description = null;
+
     public WeatherRule() {
         // ORMLite needs a no-arg constructor.
     }
@@ -61,5 +64,13 @@ public class WeatherRule {
 
     public void setTimeOffset(int time_offset) {
         this.time_offset = time_offset;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

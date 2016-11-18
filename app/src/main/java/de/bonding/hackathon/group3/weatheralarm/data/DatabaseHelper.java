@@ -55,6 +55,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                 date = formatter.parse("20:00");
                 alarm = new Alarm(date, "Brunswick");
                 getAlarmDao().create(alarm);
+
+                WeatherRule rule = new WeatherRule(211, "Thunderstorm", -30);
+                getWeatherRuleDao().create(rule);
+                rule = new WeatherRule(501, "Rain", 15);
+                getWeatherRuleDao().create(rule);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
