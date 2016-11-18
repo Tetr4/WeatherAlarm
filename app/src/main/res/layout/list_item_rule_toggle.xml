@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:padding="6dip">
+    <ImageView
+        android:id="@+id/weather_condition_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/w13d"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1.26"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rule_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="6dip"
+            android:text="Scrape the ice of the car" />
+
+        <TextView
+            android:id="@+id/changed_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="6dip"
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
+            android:text="20 Minutes earlier"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ToggleButton
+        android:id="@+id/togglebutton"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton" />
+
+</LinearLayout>
