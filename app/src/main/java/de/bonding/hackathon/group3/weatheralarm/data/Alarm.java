@@ -57,6 +57,10 @@ public class Alarm {
         return desired_time;
     }
 
+    public void setDesiredTime(Date desired_time) {
+        this.desired_time = desired_time;
+    }
+
     public Date getActualTime() {
         return actual_time;
     }
@@ -79,5 +83,13 @@ public class Alarm {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Alarm))
+            return false;
+        Alarm other = (Alarm)o;
+        return other.getId() == getId();
     }
 }

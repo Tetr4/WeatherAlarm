@@ -31,7 +31,7 @@ public class AlarmFragment extends Fragment {
         alarms = getAlarms();
 
         // Create the adapter to convert the array to views
-        AlarmItemAdapter adapter = new AlarmItemAdapter(getActivity(), alarms);
+        AlarmItemAdapter adapter = new AlarmItemAdapter(getActivity(), alarms, this);
 
         // Attach the adapter to a ListView
         ListView alarmList = (ListView) rootView.findViewById(R.id.alarm_list);
@@ -41,7 +41,7 @@ public class AlarmFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
                 AlarmDetailDialog detail = AlarmDetailDialog.newInstance();
                 ft.add(detail, "alarm_details");
                 ft.commit();
@@ -53,6 +53,12 @@ public class AlarmFragment extends Fragment {
 
     public List<Alarm> getAlarmList() {
         return alarms;
+    }
+
+    public void notifyAlarmlistUpdate() {
+        ListView alarmList = (ListView) getView().findViewById(R.id.alarm_list);
+        AlarmItemAdapter adapter = (AlarmItemAdapter) alarmList.getAdapter();
+        adapter.notifyDataSetChanged();
     }
 
     private List<Alarm> getAlarms() {

@@ -61,7 +61,7 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
         if (edit) {
             ListView list = (ListView) dialogView.findViewById(R.id.rules_list);
             // TODO put alarm rule entries into list
-            // TODO set timepicker
+            // set timepicker
             TimePicker picker = (TimePicker)dialogView.findViewById(R.id.timePicker);
             Date date = alarm.getDesiredTime();
             picker.setCurrentHour(date.getHours());
@@ -117,20 +117,29 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
             boolean edit = alarm != null;
             if (!edit)
                 alarm = new Alarm(date, "Brunswick");
+            else
+                alarm.setDesiredTime(date);
 
             MainActivity main = (MainActivity)getActivity();
             DatabaseHelper db = main.getDatabase();
             RuntimeExceptionDao<Alarm, Integer> alarmDao = db.getAlarmDao();
 
-            if (edit)
+            AlarmFragment alarmFragment = (AlarmFragment) getParentFragment();
+            if (edit) {
                 alarmDao.update(alarm);
+
+                List<Alarm> alarmList = alarmFragment.getAlarmList();
+                int index = alarmList.indexOf(alarm);
+                if (index != -1)
+                    alarmList.set(index, alarm);
+            }
             else {
                 alarmDao.create(alarm);
 
-
-                //AlarmFragment alarmFragment = getActivity().findViewById(R.id.);
-                //alarmFragment.getAlarmList().add(alarm);
+                alarmFragment.getAlarmList().add(alarm);
             }
+
+            alarmFragment.notifyAlarmlistUpdate();
 
         } catch (ParseException e) {
             Log.e("", "Failed to add new alarm", e);

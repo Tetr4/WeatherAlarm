@@ -1,5 +1,6 @@
 package de.bonding.hackathon.group3.weatheralarm.ui;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,8 +28,11 @@ import de.bonding.hackathon.group3.weatheralarm.data.WeatherType;
 
 public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
 
-    public AlarmItemAdapter(Context context, List<Alarm> values) {
+    private Fragment fragment;
+
+    public AlarmItemAdapter(Context context, List<Alarm> values, Fragment fragment) {
         super(context, -1, values);
+        this.fragment = fragment;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction ft = main.getFragmentManager().beginTransaction();
+                FragmentTransaction ft = fragment.getChildFragmentManager().beginTransaction();
                 AlarmDetailDialog detail = AlarmDetailDialog.newInstance(alarm);
                 ft.add(detail, "alarm_details");
                 ft.commit();
