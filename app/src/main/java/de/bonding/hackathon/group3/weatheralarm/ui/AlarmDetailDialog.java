@@ -53,6 +53,8 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
         // inflate content layout
 
         View dialogView = getActivity().getLayoutInflater().inflate(R.layout.fragment_alarm_detail, null);
+        TimePicker picker = (TimePicker)dialogView.findViewById(R.id.timePicker);
+        picker.setIs24HourView(true);
 
         // add or edit a station?
         Alarm alarm = getAlarmArgument();
@@ -62,7 +64,6 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
             ListView list = (ListView) dialogView.findViewById(R.id.rules_list);
             // TODO put alarm rule entries into list
             // set timepicker
-            TimePicker picker = (TimePicker)dialogView.findViewById(R.id.timePicker);
             Date date = alarm.getDesiredTime();
             picker.setCurrentHour(date.getHours());
             picker.setCurrentMinute(date.getMinutes());
