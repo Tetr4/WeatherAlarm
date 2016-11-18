@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:background="?android:selectableItemBackground"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:baselineAligned="false" >
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="fill_parent"
+    android:padding="6dip">
+    <ImageView
+        android:id="@+id/weather_condition_image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorPrimary"
-        tools:text="19:30" />
+        android:src="@drawable/w13d"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1.26"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rule_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="6dip"
+            android:text="Scrape the ice of the car" />
+
+        <TextView
+            android:id="@+id/changed_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="6dip"
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
+            android:text="20 Minutes earlier"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
