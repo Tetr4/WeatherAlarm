@@ -3,6 +3,8 @@ package de.bonding.hackathon.group3.weatheralarm.data;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.bonding.hackathon.group3.weatheralarm.R;
+
 /**
  * Represents a weather condition as set by open weather map.
  */
@@ -37,6 +39,49 @@ public class WeatherType {
 
     public String getIcon() {
         return icon;
+    }
+
+    public static int IconToResourceId(String icon) {
+        switch (icon) {
+            case "01d":
+                return R.drawable.w01d;
+            case "02d":
+                return R.drawable.w02d;
+            case "03d":
+                return R.drawable.w03d;
+            case "04d":
+                return R.drawable.w04d;
+            case "09d":
+                return R.drawable.w09d;
+            case "10d":
+                return R.drawable.w10d;
+            case "11d":
+                return R.drawable.w11d;
+            case "13d":
+                return R.drawable.w13d;
+            case "50d":
+                return R.drawable.w50d;
+            case "01n":
+                return R.drawable.w01n;
+            case "02n":
+                return R.drawable.w02n;
+            case "03n":
+                return R.drawable.w03n;
+            case "04n":
+                return R.drawable.w04n;
+            case "09n":
+                return R.drawable.w09n;
+            case "10n":
+                return R.drawable.w10n;
+            case "11n":
+                return R.drawable.w11n;
+            case "13n":
+                return R.drawable.w13n;
+            case "50n":
+                return R.drawable.w50n;
+            default:
+                return R.drawable.w01d;
+        }
     }
 
     public static Map<Integer, WeatherType> getWeatherTypes() {

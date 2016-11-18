@@ -66,10 +66,11 @@ public class RuleItemAdapter extends ArrayAdapter<WeatherRule> {
             }
         }
 
-        if (icon != null) {
-            // TODO Use icon
+        // Set the icon to the right one.
+        if (icon != null)
+            imgWeather.setImageResource(WeatherType.IconToResourceId(icon));
+        else
             imgWeather.setImageResource(R.drawable.w01d);
-        }
 
         return rowView;
     }

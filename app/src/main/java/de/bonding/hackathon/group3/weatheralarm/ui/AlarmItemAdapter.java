@@ -22,6 +22,7 @@ import de.bonding.hackathon.group3.weatheralarm.R;
 import de.bonding.hackathon.group3.weatheralarm.data.Alarm;
 import de.bonding.hackathon.group3.weatheralarm.data.DatabaseHelper;
 import de.bonding.hackathon.group3.weatheralarm.data.WeatherInfo;
+import de.bonding.hackathon.group3.weatheralarm.data.WeatherType;
 
 public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
 
@@ -93,10 +94,10 @@ public class AlarmItemAdapter extends ArrayAdapter<Alarm> {
                 bestInfo = info;
         }
 
-        if (bestInfo != null) {
-            // TODO Use bestInfo.getIcon()
+        if (bestInfo != null)
+            imgWeather.setImageResource(WeatherType.IconToResourceId(bestInfo.getIcon()));
+        else
             imgWeather.setImageResource(R.drawable.w01d);
-        }
 
         return rowView;
     }
