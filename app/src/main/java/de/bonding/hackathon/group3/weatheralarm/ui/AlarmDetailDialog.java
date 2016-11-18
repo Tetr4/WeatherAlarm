@@ -6,16 +6,22 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.bonding.hackathon.group3.weatheralarm.R;
 import de.bonding.hackathon.group3.weatheralarm.data.Alarm;
+import de.bonding.hackathon.group3.weatheralarm.data.DatabaseHelper;
 
 public class AlarmDetailDialog extends DialogFragment implements View.OnClickListener {
     private static final String ARG_ALARM_ID = "ARG_ALARM_ID";
@@ -28,7 +34,7 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
 
     public static AlarmDetailDialog newInstance() {
         AlarmDetailDialog fragment = new AlarmDetailDialog();
-        return new AlarmDetailDialog();
+        return fragment;
     }
 
     public static AlarmDetailDialog newInstance(Alarm alarm) {
@@ -56,6 +62,10 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
             ListView list = (ListView) dialogView.findViewById(R.id.rules_list);
             // TODO put alarm rule entries into list
             // TODO set timepicker
+            TimePicker picker = (TimePicker)dialogView.findViewById(R.id.timePicker);
+            Date date = alarm.getDesiredTime();
+            picker.setCurrentHour(date.getHours());
+            picker.setCurrentMinute(date.getMinutes());
         }
 
         // build alert dialog
@@ -97,7 +107,34 @@ public class AlarmDetailDialog extends DialogFragment implements View.OnClickLis
 
         Dialog dialog = getDialog();
 
-        // TODO save input
+        // save input
+        TimePicker picker = (TimePicker)dialog.findViewById(R.id.timePicker);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        try {
+            Date date = formatter.parse(picker.getCurrentHour() + ":" + picker.getCurrentMinute());
+            Alarm alarm = getAlarmArgument();
+            boolean edit = alarm != null;
+            if (!edit)
+                alarm = new Alarm(date, "Brunswick");
+
+            MainActivity main = (MainActivity)getActivity();
+            DatabaseHelper db = main.getDatabase();
+            RuntimeExceptionDao<Alarm, Integer> alarmDao = db.getAlarmDao();
+
+            if (edit)
+                alarmDao.update(alarm);
+            else {
+                alarmDao.create(alarm);
+
+
+                //AlarmFragment alarmFragment = getActivity().findViewById(R.id.);
+                //alarmFragment.getAlarmList().add(alarm);
+            }
+
+        } catch (ParseException e) {
+            Log.e("", "Failed to add new alarm", e);
+        }
 
         dialog.dismiss();
     }

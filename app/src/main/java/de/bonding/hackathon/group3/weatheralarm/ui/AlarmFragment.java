@@ -1,7 +1,9 @@
 package de.bonding.hackathon.group3.weatheralarm.ui;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,7 @@ import de.bonding.hackathon.group3.weatheralarm.data.Alarm;
 
 public class AlarmFragment extends Fragment {
     private static final String TAG = AlarmFragment.class.getSimpleName();
-    List<Alarm> alarms;
+    private List<Alarm> alarms;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +37,22 @@ public class AlarmFragment extends Fragment {
         ListView alarmList = (ListView) rootView.findViewById(R.id.alarm_list);
         alarmList.setAdapter(adapter);
 
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                AlarmDetailDialog detail = AlarmDetailDialog.newInstance();
+                ft.add(detail, "alarm_details");
+                ft.commit();
+            }
+        });
+
         return rootView;
+    }
+
+    public List<Alarm> getAlarmList() {
+        return alarms;
     }
 
     private List<Alarm> getAlarms() {
